@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Subscribe</title>
+	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Sora:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="hero">
+		<h3 class="glow">Subscribe Now!</h3>
+		<h1>Galaxy Subscription</h1>
+		<p>Subscribe for more details.</p>
+		<form name="submit-to-google-sheet">
+			<input type="email" name="Email" placeholder="Type Your Email" required>
+			<button type="submit"><img src="send.png" width="30px"></button>
+		</form>
+		<span id="msg"></span>
+		<div class="glass">
+			<div class="text">
+			<p>To see latest Events and Announce Subscribe here using your Email Account. Click Read More again to Proceed to Website.</p>
+			<a href="https://galaxmess.github.io/GalaxyWebsite/">Read More</a>
+		</div>
+	</div>
+</div>
+</form>	
+</div>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzdCzK-1XhaJKU7DdsVRNkjMJplUNP71037C83s2Tbv2qKZJHf9h9t-kgbNZg7euHroRg/exec'
+  const form = document.forms['submit-to-google-sheet']
+  const msg = document.getElementById("msg")
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+      	msg.innerHTML = "Thanks for Subscribing! You will Receive Announcement Soon."
+      	setTimeout(function(){
+      		msg.innerHTML = ""
+      	},3500)
+      	form.reset()
+      })
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+<script type="text/javascript" src="vanilla-tilt.js"></script>
+<script>
+		VanillaTilt.init(document.querySelector(".glass"), {
+		max: 25,
+		speed: 400,
+		glare: true,
+		"max-glare": 1,
+	});
+</script>
+</body>
+</html>
